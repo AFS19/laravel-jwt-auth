@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     /* Login method*/
-    function login(LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         $token = auth()->attempt($request->validated());
         if ($token) {
@@ -25,7 +25,7 @@ class AuthController extends Controller
     }
 
     /* register method */
-    function register(RegistrationRequest $request)
+    public function register(RegistrationRequest $request)
     {
         $user = User::create($request->validated());
         if ($user) {
@@ -40,7 +40,7 @@ class AuthController extends Controller
     }
 
     /* return jwt access token */
-    public function responseWithToken($token, $user)
+    protected function responseWithToken($token, $user)
     {
         return response()->json([
             'status' => 'success',
